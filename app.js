@@ -7,15 +7,15 @@ dotenv.config();
 // const path = require("path");
 
 mongoose
-  .connect(process.env.DB_CONNECTION, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(console.log("Connected to DB"))
-  .catch(error => console.log(error));
+    .connect(process.env.DB_CONNECTION, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(console.log("Connected to DB"))
+    .catch((error) => console.log(error));
 
 //Middlewares
-app.use(express.json());
+app.use(express.json()); //Body-parser is no longer useful
 
 //Import Routes
 const destinationRoute = require("./Routes/Destination");
