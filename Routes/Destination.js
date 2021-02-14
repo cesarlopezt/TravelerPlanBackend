@@ -3,7 +3,7 @@ import Dest from "../Models/Destination.js";
 const { Destination, DestinationSchema } = Dest;
 import User from "../Models/User.js";
 import fetch from "node-fetch";
-import verifyToken from "./verifyToken.js";
+import verifyToken from "../Controller/Auth/verifyToken.js";
 
 
 const router = express.Router();
