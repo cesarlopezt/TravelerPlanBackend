@@ -1,7 +1,9 @@
-const mongoose = require("mongoose");
-const { Destination, DestinationSchema } = require("./Destination");
+import mongoose from "mongoose";
+const { Schema, model } = mongoose;
+import Dest from "../Models/Destination.js";
+const { Destination, DestinationSchema } = Dest;
 
-const UserSchema = mongoose.Schema(
+const UserSchema = Schema(
   {
     name: {
       type: String,
@@ -21,4 +23,4 @@ const UserSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", UserSchema);
+export default model("User", UserSchema);

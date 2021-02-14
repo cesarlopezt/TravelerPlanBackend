@@ -1,8 +1,12 @@
-const router = require("express").Router();
-const { Destination, DestinationSchema } = require("../Models/Destination");
-const User = require("../Models/User");
-const fetch = require("node-fetch");
-const verifyToken = require("./verifyToken");
+import express from "express";
+import Dest from "../Models/Destination.js";
+const { Destination, DestinationSchema } = Dest;
+import User from "../Models/User.js";
+import fetch from "node-fetch";
+import verifyToken from "./verifyToken.js";
+
+
+const router = express.Router();
 
 router.get("/", verifyToken, (req, res) => {
     // res.send("Destination main API point");
@@ -23,4 +27,4 @@ router.get("/search/:query", (req, res) => {
         .catch((err) => console.log(err));
 });
 
-module.exports = router;
+export default router;

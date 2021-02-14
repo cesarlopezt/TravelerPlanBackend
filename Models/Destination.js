@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+const { Schema, model } = mongoose;
 
-const DestinationSchema = mongoose.Schema({
+const DestinationSchema = Schema({
   name: {
     type: String,
     required: true
@@ -10,10 +11,10 @@ const DestinationSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  coords: [mongoose.Schema.Types.Mixed]
+  coords: [Schema.Types.Mixed]
 });
 
-module.exports = {
+export default {
   Destination: mongoose.model("Destination", DestinationSchema),
   DestinationSchema
 };

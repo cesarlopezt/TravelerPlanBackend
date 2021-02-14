@@ -1,11 +1,14 @@
-const router = require("express").Router();
-const { Destination, DestinationSchema } = require("../Models/Destination");
-const User = require("../Models/User");
-// const fetch = require("node-fetch");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { registerValidation, loginValidation } = require("./validation");
-const Joi = require("@hapi/joi");
+import express from "express";
+import Dest from "../Models/Destination.js";
+const { Destination, DestinationSchema } = Dest;
+import User from "../Models/User.js";
+import bcryptjs from "bcryptjs";
+const { genSalt, hash, compare } = bcryptjs;
+import jwt from "jsonwebtoken";
+import { registerValidation, loginValidation } from "./validation.js";
+import Joi from "@hapi/joi";
+
+const router = express.Router();
 
 router.get("/", (req, res) => {
     res.send("Users main API point");
@@ -24,8 +27,8 @@ router.post("/register", async (req, res) => {
             .send("Another user has been created with that Email Adress");
 
     // Hash password
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const salt = await genSalt();
+    const hashedPassword = await hash(req.body.password, salt);
 
     const user = new User({
         name: req.body.name,
@@ -47,13 +50,13 @@ router.post("/login", async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     //Checking if email exists
-    const user = await User.findOne({ email: req.body.email });
+    const user = await findOne({ email: req.body.email });
     if (!user)
         return res
             .status(400)
             .send("Please provide a valid Email and password.");
     //Checking password
-    const validPass = await bcrypt.compare(req.body.password, user.password);
+    const validPass = await compare(req.body.password, user.password);
     if (!validPass)
         return res
             .status(400)
@@ -66,4 +69,4 @@ router.post("/login", async (req, res) => {
     res.status(200);
 });
 
-module.exports = router;
+export default router;

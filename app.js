@@ -1,13 +1,13 @@
-const express = require("express");
+import express, { json } from "express";
 const app = express();
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config();
-// const bodyParser = require("body-parser");
-// const path = require("path");
+import mogoose from "mongoose";
+import { config } from "dotenv";
 
-mongoose
-    .connect(process.env.DB_CONNECTION, {
+import routerRoute from "./Routes/router.js";
+
+
+config();
+mogoose.connect(process.env.DB_CONNECTION, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
@@ -15,14 +15,10 @@ mongoose
     .catch((error) => console.log(error));
 
 //Middlewares
-app.use(express.json()); //Body-parser is no longer useful
+app.use(json());
+app.use("", routerRoute)
 
-//Import Routes
-const destinationRoute = require("./Routes/Destination");
-const userRoute = require("./Routes/User");
-
-//Routes Middlewares
-app.use("/destination", destinationRoute);
-app.use("/user", userRoute);
 
 app.listen(3000);
+
+export default app;
