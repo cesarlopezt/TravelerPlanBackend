@@ -1,22 +1,22 @@
-import express, { json } from "express";
-const app = express();
+import express from "express";
 import mogoose from "mongoose";
-import { config } from "dotenv";
+import dotenv from "dotenv";
 
 import routerRoute from "./Routes/router.js";
 
+const app = express();
 
-config();
+dotenv.config();
 mogoose.connect(process.env.DB_CONNECTION, {
-        useNewUrlParser: true,
+    useNewUrlParser: true,
         useUnifiedTopology: true,
     })
     .then(console.log("Connected to DB"))
     .catch((error) => console.log(error));
 
 //Middlewares
-app.use(json());
-app.use("", routerRoute)
+app.use(express.json());
+app.use("", routerRoute);
 
 
 app.listen(3000);

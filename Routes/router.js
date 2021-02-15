@@ -1,6 +1,11 @@
 import express from "express";
 
+import logger from "../Middlewares/logger.js";
+
 const router = express.Router();
+
+// Middlewares
+router.use(logger);
 
 // Import Routes
 import destinationRoute from "./Destination.js";

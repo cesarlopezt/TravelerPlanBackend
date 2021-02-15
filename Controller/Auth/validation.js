@@ -1,5 +1,4 @@
 import Joi from "@hapi/joi";
-const { object, string } = Joi;
 
 export const registerValidation = (data) => {
     const schema = Joi.object({
