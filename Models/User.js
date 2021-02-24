@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 const { Schema, model } = mongoose;
-import Dest from "../Models/Destination.js";
-const { Destination, DestinationSchema } = Dest;
+import {Destination, DestinationSchema } from "../Models/Destination.js";
 
 const UserSchema = Schema(
   {
@@ -17,8 +16,7 @@ const UserSchema = Schema(
       type: String,
       required: true
     },
-    placesToVisit: [DestinationSchema],
-    placesVisited: [DestinationSchema]
+    places: [DestinationSchema]
   },
   { timestamps: true }
 );

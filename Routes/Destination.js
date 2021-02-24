@@ -1,16 +1,16 @@
 import express from "express";
-import Dest from "../Models/Destination.js";
-const { Destination, DestinationSchema } = Dest;
-import User from "../Models/User.js";
+import  { Destination, DestinationSchema } from "../Models/Destination.js";
+import UserModel from "../Models/User.js";
 
 import verifyToken from "../Middlewares/verifyToken.js";
 
 const router = express.Router();
 
-router.get("/", verifyToken, (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
     // res.send("Destination main API point");
-    res.send(req.user);
-    User.findById(req.user._id);
+    // res.send(req.user);
+    let i = await UserModel.findById(req.user._id);
+    res.send(i)
 });
 
 // router.get("/search/:query", (req, res) => {

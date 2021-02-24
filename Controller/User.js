@@ -4,7 +4,7 @@ const { genSalt, hash, compare } = bcryptjs;
 import jwt from "jsonwebtoken";
 
 import UserModel from "../Models/User.js";
-import { registerValidation, loginValidation } from "./Auth/validation.js";
+import { registerValidation, loginValidation } from "../Models/validation/UserValidation.js";
 
 async function register(req, res){
     // Validate
